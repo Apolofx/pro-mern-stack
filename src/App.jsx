@@ -1,22 +1,26 @@
-class HelloWorld extends React.Component {
-  render() {
-    const continents = [
-      "tuvieja",
-      "mivieja",
-      "lavieja de el",
-      "y anda a cagar"
-    ];
-    const helloContinents = Array.from(continents, c => `Hello ${c}!`).join(
-      " "
-    );
-
-    return (
-      <div title="Outer div">
-        <h1>{helloContinents}</h1>
-      </div>
-    );
-  }
+function capitalize(string) {
+  return string.charAt(0).toUpperCase() + string.slice(1);
 }
+const issues = [
+  {
+    id: 1,
+    status: "New",
+    owner: "Ravan",
+    effort: 5,
+    created: new Date("2018-08-15"),
+    due: undefined,
+    title: "Error in console when clicking Add"
+  },
+  {
+    id: 2,
+    status: "Assigned",
+    owner: "Eddie",
+    effort: 14,
+    created: new Date("2018-08-16"),
+    due: new Date("2018-08-30"),
+    title: "Missing bottom border on panel"
+  }
+];
 
 class IssueFilter extends React.Component {
   render() {
@@ -26,32 +30,18 @@ class IssueFilter extends React.Component {
 
 class IssueTable extends React.Component {
   render() {
-    const rowStyle = {
-      padding: 4,
-      border: "1px solid silver"
-    };
+    const issueRows = issues.map(issue => (
+      <IssueRow key={issue.id} issue={issue} />
+    ));
+    const tableHeader = Object.keys(issues[0]).map(key => (
+      <th>{capitalize(key)}</th>
+    ));
     return (
-      <table style={{ borderCollapse: "collapse" }}>
+      <table className="bordered-table">
         <thead>
-          <tr>
-            <th>ID</th>
-            <th>Title</th>
-          </tr>
+          <tr>{tableHeader}</tr>
         </thead>
-        <tbody>
-          <IssueRow
-            rowStyle={rowStyle}
-            issue_id={1}
-            issue_title="Tu hermana no me da bola"
-          />{" "}
-          {/*somehow pass Issue 1 data to this*/}
-          <IssueRow
-            rowStyle={rowStyle}
-            issue_id={2}
-            issue_title="Tengo hemorroides"
-          />{" "}
-          {/*somehow pass Issue 2 data to this*/}
-        </tbody>
+        <tbody>{issueRows}</tbody>
       </table>
     );
   }
@@ -59,11 +49,16 @@ class IssueTable extends React.Component {
 
 class IssueRow extends React.Component {
   render() {
-    const style = this.props.rowStyle;
+    const issue = this.props.issue;
     return (
       <tr>
-        <td style={style}>{this.props.issue_id}</td>
-        <td style={style}>{this.props.issue_title}</td>
+        <td>{issue.id}</td>
+        <td>{issue.status}</td>
+        <td>{issue.owner}</td>
+        <td>{issue.created.toDateString()}</td>
+        <td>{issue.effort}</td>
+        <td>{issue.due ? issue.due.toDateString() : ""}</td>
+        <td>{issue.title}</td>
       </tr>
     );
   }
