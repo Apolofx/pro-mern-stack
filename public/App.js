@@ -26,7 +26,7 @@ function capitalize(string) {
   return string.charAt(0).toUpperCase() + string.slice(1);
 }
 
-var issues = [{
+var initialIssues = [{
   id: 1,
   status: "New",
   owner: "Ravan",
@@ -71,21 +71,27 @@ var IssueTable = /*#__PURE__*/function (_React$Component2) {
   var _super2 = _createSuper(IssueTable);
 
   function IssueTable() {
+    var _this;
+
     _classCallCheck(this, IssueTable);
 
-    return _super2.apply(this, arguments);
+    _this = _super2.call(this);
+    _this.state = {
+      issues: initialIssues
+    };
+    return _this;
   }
 
   _createClass(IssueTable, [{
     key: "render",
     value: function render() {
-      var issueRows = issues.map(function (issue) {
+      var issueRows = this.state.issues.map(function (issue) {
         return /*#__PURE__*/React.createElement(IssueRow, {
           key: issue.id,
           issue: issue
         });
       });
-      var tableHeader = Object.keys(issues[0]).map(function (key) {
+      var tableHeader = Object.keys(initialIssues[0]).map(function (key) {
         return /*#__PURE__*/React.createElement("th", null, capitalize(key));
       });
       return /*#__PURE__*/React.createElement("table", {
