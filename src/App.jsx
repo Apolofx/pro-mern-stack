@@ -9,7 +9,7 @@ const issues = [
     effort: 5,
     created: new Date("2018-08-15"),
     due: undefined,
-    title: "Error in console when clicking Add"
+    title: "Error in console when clicking Add",
   },
   {
     id: 2,
@@ -18,8 +18,8 @@ const issues = [
     effort: 14,
     created: new Date("2018-08-16"),
     due: new Date("2018-08-30"),
-    title: "Missing bottom border on panel"
-  }
+    title: "Missing bottom border on panel",
+  },
 ];
 
 class IssueFilter extends React.Component {
@@ -30,10 +30,10 @@ class IssueFilter extends React.Component {
 
 class IssueTable extends React.Component {
   render() {
-    const issueRows = issues.map(issue => (
+    const issueRows = issues.map((issue) => (
       <IssueRow key={issue.id} issue={issue} />
     ));
-    const tableHeader = Object.keys(issues[0]).map(key => (
+    const tableHeader = Object.keys(issues[0]).map((key) => (
       <th>{capitalize(key)}</th>
     ));
     return (
