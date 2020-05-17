@@ -103,7 +103,7 @@ class IssueTable extends React.Component {
 
 En React se puede pasar `state` como props de padre a hijo y de esa manera ser compartido verticalmente, pero no se puede compartirlo horizontalmente, es decir, entre componentes hermanos. Por lo cual lo que vamos a hacer es meter todos los componentes que tienen que compartir estado, en un nivel debajo de un componente padre que sea el constructor de dicho `state`. Si algun componente necesita usar, modificar, o actualizar este estado, se lo pasamos por props como `propiedad={this.state.propiedad}`.
 
-## Compartiendo Metodos entre padre/hijo
+## Compartiendo Metodos entre padre/hijo (Lift Up State)
 
 A su vez, podemos tener un componente padre con muchos hijos, y pasar los metodos deseados como props a sus hijos. Esto es muy practico, pero hay que tener en cuenta que si los componentes hijos son componentes _clase_, vamos a tener que darle un tratamiento especial al metodo en su creacion, ya que sino vamos a tener problemas con la referenciacion the **this**.
 Para esto, podriamos resolverlo bindeando this en cada componente clase que vaya a usar el metodo por props. Pero es mas practico bindearlo en la creacion original del metodo en el componente padre.
